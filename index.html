@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissors</title>
+        <meta charset="utf-8"/>
+        <style>
+            body {background-color: lightgray;}
+            button {font-size: 16px; border-radius: 8px; background-color: darkslateblue; color:rgb(63, 178, 34); padding: 32px 16px;
+                        width: 100px; border: 2px solid orange; transition-duration: 0.07;}
+            button:hover {
+                transform: 1.1;
+                box-shadow: orange;
+                background-color: palegreen;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id='container'></div>
+            <div id='btns'>
+                <button id='rock'>Rock</button>
+                <button id='paper'>Paper</button>
+                <button id='scissors'>Scissors</button>
+            </div>
+
+
+
+        <script>
+            const gameOptions = ['rock', 'paper', 'scissors'];
+                let playerScore = 0;
+                 let compScore = 0;
+            const container = document.querySelector('#container');
+
+            const gameTitle = document.createElement('h1');
+            gameTitle.classList.add('gameTitle');
+            gameTitle.textContent = 'Rock Paper Scissors';     
+            gameTitle.style.cssText = 'color: blue'
+            container.appendChild(gameTitle);
+
+            const rock = document.querySelector('#rock');
+            rock.addEventListener('click', () => {
+                const playerSelection = 'rock';
+                const computerSelection = computerPlay();
+                playRound(playerSelection, computerSelection);
+                showScores.textContent = 'Player: ' + playerScore + ' \nComputer: ' + compScore;
+            })
+
+            const paper = document.querySelector('#paper')
+            paper.addEventListener('click', () => {
+                const playerSelection = 'paper';
+                const computerSelection = computerPlay();
+                playRound(playerSelection, computerSelection);
+                showScores.textContent = 'Player: ' + playerScore + ' \nComputer: ' + compScore;
+            })
+
+            const scissors = document.querySelector('#scissors')
+            scissors.addEventListener('click', () => {
+                const playerSelection = 'scissors';
+                const computerSelection = computerPlay();
+                playRound(playerSelection, computerSelection);
+                showScores.textContent = 'Player: ' + playerScore + ' \nComputer: ' + compScore;
+            })
+            
+
+
+            
+
+            function computerPlay(){
+                const randomSelection = gameOptions[Math.floor(Math.random()*gameOptions.length)];
+                return randomSelection
+            }
+
+            
+      
+            function playRound(playerSelection, computerSelection) {
+                if (playerSelection === computerSelection){
+                alert("Player: " + playerSelection + " Computer: " + computerSelection + "\nIt\'s a tie!");
+                playerScore++;
+                compScore++;
+                } else if ((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === 'paper' && computerSelection === 'ROCK') || (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')) {
+                    alert("Player: " + playerSelection + " Computer: " + computerSelection + "\nYou win!! Wooooo!");
+                    playerScore++;
+                } else {
+                    alert("Player: " + playerSelection + " Computer: " + computerSelection + "\nYou lose! Sucka!");
+                    compScore++;
+                }
+            }           
+
+            const gameScore = document.createElement('div');
+            gameScore.classList.add('gameScore');
+            gameScore.textContent = 'Scores on the doors';
+            const showScores = document.createElement('p');
+            showScores.classList.add('showScores');
+            showScores.textContent = 'Player: ' + playerScore + ' \nComputer: ' + compScore;
+            gameScore.append(showScores);
+            container.appendChild(gameScore);
+       
+          /*
+            function playGame() {       
+                for (let i=0; i<6; i++) {
+                   playerSelection = (prompt("Rock, Paper, Scissors...bitch!")).toUpperCase();
+                   computerSelection = computerPlay();
+                   playRound(playerSelection, computerSelection)
+                   console.log("Scores on the doors: Player: " + playerScore + " Computer: " + compScore);
+                }
+            }
+
+        
+            playGame()  */
+
+
+        </script>
+    </body>)
+</html>
